@@ -12,14 +12,14 @@
 
 ### Key Features
 
-- **Three-Phase Curriculum Learning**:
-  - *Engage* — multi-head attention identifies critical node/edge connections; dual GCN+GAT aggregation generates enhanced feature representations
-  - *Enact* — refines minority class representations via importance sampling, metapath propagation, and anomaly detection
-  - *Embed* — memory-augmented reinforcement learning progressively refines embeddings via reward-modulated updates
-- **Dual-Loss Optimisation**: Cross-entropy combined with adaptive curriculum loss for principled difficulty progression
-- **Four Loss Strategies**: Standard, curriculum, entropy-regularised, and combined — selectable or dynamically scheduled
-- **Progressive Training**: Phase-locked training (Engage → Enact → Embed → Finetune) with independent optimisers per phase
-- **Comprehensive Analysis**: Gradient stability, t-SNE visualisation (per phase), ROC curves, confusion matrices, theory validation plots
+- Three-Phase Curriculum Learning**:
+  - Engage — multi-head attention identifies critical node/edge connections; dual GCN+GAT aggregation generates enhanced feature representations
+  - Enact — refines minority class representations via importance sampling, metapath propagation, and anomaly detection
+  - Embed — memory-augmented reinforcement learning progressively refines embeddings via reward-modulated updates
+- Dual-Loss Optimisation: Cross-entropy combined with adaptive curriculum loss for principled difficulty progression
+- Four Loss Strategies: Standard, curriculum, entropy-regularised, and combined — selectable or dynamically scheduled
+- Progressive Training: Phase-locked training (Engage → Enact → Embed → Finetune) with independent optimisers per phase
+- Comprehensive Analysis: Gradient stability, t-SNE visualisation (per phase), ROC curves, confusion matrices, theory validation plots
 
 ---
 
@@ -117,14 +117,14 @@ Input Node Features (in_dim)
 
 | Component | Module | Role |
 |---|---|---|
-| **TPE** | `TopologicalPositionEncoder` | Structural bias: degree, clustering, reachability, RW-diagonal |
-| **Engage** | `EngageModule` | Dual GCN+GAT aggregation with gated fusion |
-| **Backbone** | `ResidualGNNBlock` × L | Optional stochastic-depth GCN+GAT residual layers |
-| **Enact** | `EnactModule` | 5-component minority refinement with feedback |
-| **Embed** | `EmbedModule` | Memory-augmented RL with knowledge graph integration |
-| **Aux heads** | `aux_engage`, `aux_enact` | Intermediate supervision (label smoothing) |
-| **Phase weights** | `phase_weights` | Learned softmax ensemble over 3 phases |
-| **Curriculum** | `curriculum_factor` | Per-class difficulty scaling |
+| TPE | `TopologicalPositionEncoder` | Structural bias: degree, clustering, reachability, RW-diagonal |
+| Engage | `EngageModule` | Dual GCN+GAT aggregation with gated fusion |
+| Backbone | `ResidualGNNBlock` × L | Optional stochastic-depth GCN+GAT residual layers |
+| Enact | `EnactModule` | 5-component minority refinement with feedback |
+| Embed | `EmbedModule` | Memory-augmented RL with knowledge graph integration |
+| Aux heads | `aux_engage`, `aux_enact` | Intermediate supervision (label smoothing) |
+| Phase weights | `phase_weights` | Learned softmax ensemble over 3 phases |
+| Curriculum | `curriculum_factor` | Per-class difficulty scaling |
 
 ---
 
@@ -148,11 +148,11 @@ x ──┬── NodeImportanceWeighting ──┐
     └── KnowledgeTransfer ────────┘
 ```
 
-- **NodeImportanceWeighting**: Prototype-based similarity; EMA prototype updates per class
-- **AdaptiveSampling**: Class-prototype distance + neighbour degree for minority upweighting
-- **EdgeIntensityModelling**: Learns edge intensities to weight neighbourhood aggregation
-- **AnomalyDetection**: Feature + structural anomaly scores; class-conditional deviation
-- **KnowledgeTransfer**: Prototype similarity projection for cross-class knowledge sharing
+- NodeImportanceWeighting: Prototype-based similarity; EMA prototype updates per class
+- AdaptiveSampling: Class-prototype distance + neighbour degree for minority upweighting
+- EdgeIntensityModelling: Learns edge intensities to weight neighbourhood aggregation
+- AnomalyDetection: Feature + structural anomaly scores; class-conditional deviation
+- KnowledgeTransfer: Prototype similarity projection for cross-class knowledge sharing
 
 ---
 
